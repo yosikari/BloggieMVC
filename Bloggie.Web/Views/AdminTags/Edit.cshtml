@@ -24,7 +24,15 @@
 		</div>
 
 		<div class="mb-3">
-			<button type="submit" class="btn btn-dark">Update</button>
+			<div class="d-flex">
+				<button type="submit" class="btn btn-dark">Update</button>
+				<button type="submit" class="btn btn-danger ms-2"
+						asp-area=""
+						asp-controller="AdminTags"
+						asp-action="Delete">
+					Delete
+				</button>
+			</div>
 		</div>
 	</form>
 </div>
