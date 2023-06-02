@@ -10,8 +10,8 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-			<div class="container-fluid">
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow">
+			<div class="container">
 				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bloggie.Web</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
@@ -32,6 +32,12 @@
 									   asp-area=""
 									   asp-controller="AdminTags"
 									   asp-action="Add">Add Tag</a>
+								</li>
+								<li>
+									<a class="dropdown-item"
+									   asp-area=""
+									   asp-controller="AdminTags"
+									   asp-action="List">Show All Tags</a>
 								</li>
 							</ul>
 						</li>
