@@ -16,7 +16,7 @@ namespace Bloggie.Web.Models.ViewModels
 
         // Display tags
         public IEnumerable<SelectListItem> Tags { get; set; }
-        // Collect tag
-        public string SelectedTag { get; set; }
+		// Collect tag
+		public string[] SelectedTags { get; set; } = Array.Empty<string>();
     }
 }
