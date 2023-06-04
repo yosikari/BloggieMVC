@@ -9,11 +9,11 @@ namespace Bloggie.Web.Repositories
 		private readonly BloggieDbContext bloggieDbContext;
 
 		public BlogPostRepository(BloggieDbContext bloggieDbContext)
-        {
+		{
 			this.bloggieDbContext = bloggieDbContext;
 		}
 
-        public async Task<BlogPost> AddAsync(BlogPost blogPost)
+		public async Task<BlogPost> AddAsync(BlogPost blogPost)
 		{
 			await bloggieDbContext.AddAsync(blogPost);
 			await bloggieDbContext.SaveChangesAsync();
@@ -30,9 +30,9 @@ namespace Bloggie.Web.Repositories
 			return await bloggieDbContext.BlogPosts.Include(x => x.Tags).ToListAsync();
 		}
 
-		public Task<BlogPost?> GetAsync(Guid id)
+		public async Task<BlogPost?> GetAsync(Guid id)
 		{
-			throw new NotImplementedException();
+			return await bloggieDbContext.BlogPosts.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id);
 		}
 
 		public Task<BlogPost?> UpdateAsync(BlogPost blogPost)
