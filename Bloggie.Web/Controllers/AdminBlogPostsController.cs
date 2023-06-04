@@ -155,11 +155,25 @@ namespace Bloggie.Web.Controllers
 			if (updatedBlog != null)
 			{
 				//Show success notification
-				return RedirectToAction("Edit");
+				return RedirectToAction("List");
 			}
 			//Show error notification
-			return RedirectToAction("List");
+			return RedirectToAction("Edit");
 
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(EditBlogPostRequest editBlogPostRequest)
+		{
+			// Call repository to delete this blog post and tags
+			var deletedBlogPost = await blogPostRepository.DeleteAsync(editBlogPostRequest.Id);
+			if (deletedBlogPost != null)
+			{
+				//Show success notification
+				return RedirectToAction("List");
+			}
+			//Show error notification
+			return RedirectToAction("Edit", new {id = editBlogPostRequest.Id});
 		}
 	}
 }
