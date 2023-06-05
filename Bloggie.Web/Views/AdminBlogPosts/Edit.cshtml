@@ -10,7 +10,7 @@
 </div>
 
 <div class="container py-5">
-	@if(Model != null)
+	@if (Model != null)
 	{
 		<form method="post">
 
@@ -77,9 +77,9 @@
 					Udpate
 				</button>
 				<button type="submit" class="btn btn-danger ms-2"
-				asp-area=""
-				asp-controller="AdminBlogPosts"
-				asp-action="Delete">
+						asp-area=""
+						asp-controller="AdminBlogPosts"
+						asp-action="Delete">
 					Delete
 				</button>
 			</div>
@@ -91,3 +91,10 @@
 		<p>No blog post found!</p>
 	}
 </div>
+
+@section Scripts{
+	<script>
+		//init froala editor
+		var editor = new FroalaEditor('#content')
+	</script>
+}
