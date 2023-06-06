@@ -25,9 +25,16 @@
 					<input type="password" id="password" class="form-control" asp-for="Password" />
 				</div>
 
-				<div class="mb-3">
+				<div class="mb-3 d-flex align-items-end">
 					<button type="submit" class="btn btn-dark">Login</button>
+					<div class="ms-2">
+						<p class="mb-0 d-inline-block">
+							Not registered yet?
+						</p>
+						<a asp-controller="Account" asp-action="Register" class="d-inline-block">Sign up here</a>
+					</div>
 				</div>
+
 			</form>
 		</div>
 	</div>
