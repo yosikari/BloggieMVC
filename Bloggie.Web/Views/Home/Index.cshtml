@@ -4,7 +4,7 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<div class="container col-xxl-8 px-4 py-5 pb-2">
+<div class="container col-xxl-8 px-4 py-5 pb-0">
 	<div class="row aline-items-center g-5 py-5">
 		<!-- HERO LEFT SIDE -->
 		<div class="col-12 col-lg-6">
@@ -27,9 +27,9 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container mb-4">
 	<div class="row justify-content-center">
-	<div class="col-6 d-flex">
+		<div class="col-6 d-flex justify-content-center">
 			@if(Model != null && Model.Tags.Any())
 			{
 				@foreach (var tag in Model.Tags)
@@ -40,6 +40,7 @@
 		</div>
 	</div>
 </div>
+<hr/>
 
 <div class="container">
 	<div class="row justify-content-center">
