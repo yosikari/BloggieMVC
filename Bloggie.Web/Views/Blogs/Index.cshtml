@@ -50,6 +50,85 @@
 					@Html.Raw(Model.Content)
 				</div>
 
+				<div class="card">
+					<div class="card-header">
+						<h5>Comments</h5>
+						@if (signInManager.IsSignedIn(User))
+						{
+							<form method="post">
+								<div class="mb-3">
+									<label class="form-label">
+										Comment Description
+									</label>
+									<input type="text" class="form-control mb-2"
+										   asp-for="CommentDescription" />
+									<div class="mb-3 d-flex justify-content-between align-items-end">
+										<button type="submit" class="btn btn-dark d-inline-block">
+											Submit
+										</button>
+
+										<div class="mb-3 d-inline-block">
+
+												@if (Model.isLiked)
+												{
+													<a style="cursor: default;">
+														<i class="bi bi-hand-thumbs-up-fill"></i>
+													</a>
+												}
+												else
+												{
+													<a id="btnLike" style="cursor: pointer;">
+														<i class="bi bi-hand-thumbs-up"></i>
+													</a>
+												}
+											
+											<span id="totalLikes">@Model.TotalLikes</span>
+											Likes
+										</div>
+
+										<input type="hidden" asp-for="Id" />
+										<input type="hidden" asp-for="UrlHandle" />
+									</div>
+								</div>
+							</form>
+						}
+					</div>
+					<div class="card-body">
+						@if (Model.Comments != null && Model.Comments.Any())
+						{
+							@foreach (var comment in Model.Comments)
+							{
+								<div class="card mb-3">
+									<div class="card-body">
+										<div>
+											@comment.Description
+										</div>
+										<hr />
+										<div class="d-flex justify-content-between">
+											<span class="text-secondary">
+												@comment.Username
+											</span>
+											<span class="text-secondary">
+												@comment.DateAdded.ToString("HH:mm") , @comment.DateAdded.ToShortDateString()
+											</span>
+										</div>
+									</div>
+								</div>
+							}
+						}
+						else
+						{
+							<div class="card mb-3">
+								<div class="card-body">
+									<div>
+										No comments yet, be the first to share your thoughts!
+									</div>
+								</div>
+							</div>
+						}
+					</div>
+				</div>
+
 			}
 			else
 			{
@@ -97,4 +176,4 @@
 		btnLikeElement.addEventListener('click', addLikeForBlog)
 
 	</script>
-}
+		}
