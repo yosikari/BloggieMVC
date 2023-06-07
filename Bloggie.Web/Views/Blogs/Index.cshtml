@@ -1,4 +1,8 @@
-﻿@model Bloggie.Web.Models.ViewModels.BlogDetailsViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
+
+@model Bloggie.Web.Models.ViewModels.BlogDetailsViewModel
 
 @{
 	ViewData["Title"] = Model.PageTitle;
@@ -16,7 +20,23 @@
 					<span class="text-secondary">@Model.PublishedDate.ToShortDateString()</span>
 				</div>
 				<div class="mb-3">
-					<span>@Model.TotalLikes</span> Likes
+					@if (signInManager.IsSignedIn(User))
+					{
+						@if (Model.isLiked)
+						{
+							<a style="cursor: pointer;">
+								<i class="bi bi-hand-thumbs-up-fill"></i>
+							</a>
+						}
+						else
+						{
+							<a id="btnLike" style="cursor: pointer;">
+								<i class="bi bi-hand-thumbs-up"></i>
+							</a>
+						}
+					}
+					<span id="totalLikes">@Model.TotalLikes</span>
+					Likes
 				</div>
 				<div class="mb-3 d-flex">
 					@foreach (var tag in Model.Tags)
@@ -38,3 +58,43 @@
 		</div>
 	</div>
 </div>
+
+
+@section Scripts{
+	<script>
+		const btnLikeElement = document.getElementById('btnLike')
+		const totalLikeElement = document.getElementById('totalLikes')
+
+		async function getTotalLikes() {
+			fetch('/api/blogpostlike/@Model.Id/totalLikes', {
+				method: 'Get',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': '*/*'
+				}
+			}).then(data => data.json())
+				.then(result => totalLikeElement.innerHTML = result)
+		}
+
+		async function addLikeForBlog() {
+			fetch('/api/BlogPostLike/Add', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': '*/*'
+				},
+				body: JSON.stringify({
+					blogPostId: '@Model.Id',
+					userId: '@userManager.GetUserId(User)'
+				})
+			}).then(() => {
+				btnLikeElement.innerHTML = '<i class="bi bi-hand-thumbs-up-fill"></i>'
+				btnLikeElement.removeEventListener('click', addLikeForBlog)
+				getTotalLikes()
+			})
+		}
+
+		btnLikeElement.addEventListener('click', addLikeForBlog)
+
+	</script>
+}
