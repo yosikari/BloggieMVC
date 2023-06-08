@@ -52,22 +52,22 @@
 
 				<div class="card">
 					<div class="card-header">
-						<h5>Comments</h5>
+						<h5>Add new comment</h5>
 						@if (signInManager.IsSignedIn(User))
 						{
 							<form method="post">
 								<div class="mb-3">
 									<label class="form-label">
-										Comment Description
+										Comment text:
 									</label>
 									<input type="text" class="form-control mb-2"
 										   asp-for="CommentDescription" />
 									<div class="mb-3 d-flex justify-content-between align-items-end">
-										<button type="submit" class="btn btn-dark d-inline-block">
+										<button type="submit" class="btn btn-dark">
 											Submit
 										</button>
 
-										<div class="mb-3 d-inline-block">
+										<div class="mb-3" style="margin-bottom: 0px !important;">
 
 												@if (Model.isLiked)
 												{
@@ -94,6 +94,7 @@
 						}
 					</div>
 					<div class="card-body">
+						<h4>"@Model.Heading" Comments:</h4>
 						@if (Model.Comments != null && Model.Comments.Any())
 						{
 							@foreach (var comment in Model.Comments)
@@ -106,7 +107,7 @@
 										<hr />
 										<div class="d-flex justify-content-between">
 											<span class="text-secondary">
-												@comment.Username
+												By: @comment.Username
 											</span>
 											<span class="text-secondary">
 												@comment.DateAdded.ToString("HH:mm") , @comment.DateAdded.ToShortDateString()
