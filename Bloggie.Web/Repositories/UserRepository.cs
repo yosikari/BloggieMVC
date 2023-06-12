@@ -18,7 +18,7 @@ namespace Bloggie.Web.Repositories
 			var users = await authDbContext.Users.ToListAsync();
 			// Remove superAdmin from users list
 			var superAdminUser = await authDbContext.Users
-				.FirstOrDefaultAsync(x => x.Email == "superAdminUser@bloggie.com");
+				.FirstOrDefaultAsync(x => x.Email == "superadmin@bloggie.com");
 			if (superAdminUser is not null)
 			{
 				users.Remove(superAdminUser);
